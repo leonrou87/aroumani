@@ -3,68 +3,53 @@
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 
-const products = [
+const areas = [
   {
-    name: "Uber Reserve",
-    description:
-      "Book rides up to 90 days in advance. The flexible backbone powering Uber's most ambitious travel experiences — from Champagne tours in Paris to safari drives in Cape Town.",
-    category: "Core Platform",
+    label: "Scaled Businesses",
+    title: "Airports, Reserve & Shared Rides",
+    description: "Core offerings operating at massive global scale, deeply integrated into Uber's marketplace. Products like Airports, Reserve, and UberX Share set the reliability bar for everything we build.",
+    tags: ["Global Scale", "Marketplace", "Reliability"],
+    color: "#7c6dfa",
     featured: true,
   },
   {
-    name: "Uber Travel & Airports",
-    description:
-      "End-to-end travel integration: airports, coach, and train tickets within a single app. Partnered with Omio to give riders access to all transportation modes in a market.",
-    category: "Travel",
+    label: "High-Capacity & B2B",
+    title: "Shuttles, Events & Enterprise",
+    description: "Incubating 0-to-1 bets in high-capacity vehicles, airport shuttles, events transportation, and B2B — moving beyond individual rides toward group and organizational mobility.",
+    tags: ["0→1 Bets", "B2B", "Events"],
+    color: "#f06bbc",
     featured: false,
   },
   {
-    name: "Uber Safari",
-    description:
-      "Game drives in Cape Town's wilderness, bookable directly through Uber. Powered by Reserve's configuration-driven architecture — a new use case shipped to global scale.",
-    category: "Experiences",
+    label: "Intercity & Long-Distance",
+    title: "Intercity, Trains, Buses & Flights",
+    description: "Extending Uber beyond the city through deep third-party integrations — intercity routes, trains, buses, and flights — positioning Uber as a full-spectrum travel platform.",
+    tags: ["Intercity", "Trains & Buses", "Flights"],
+    color: "#38e8c8",
     featured: false,
   },
   {
-    name: "Uber Bubbles",
-    description:
-      "The world's first Champagne tour bookable exclusively via an app. Full-day experiences through Épernay and Reims, with morning Tesla pickup from Paris.",
-    category: "Experiences",
+    label: "Emerging Modalities",
+    title: "Air, Rentals & Micromobility",
+    description: "Early-stage bets on the future of movement: Uber Air, car rentals, and micromobility including bikes and scooters — incubated alongside scaled businesses on shared infrastructure.",
+    tags: ["Uber Air", "Car Rentals", "Micromobility"],
+    color: "#f0b429",
     featured: false,
   },
   {
-    name: "Uber Ski",
-    description:
-      "On-demand and advance-scheduled rides to ski resorts, in partnership with Vail Resorts. Epic Pass purchases directly within the app. Launched winter 2025.",
-    category: "Travel",
+    label: "Platform & Infrastructure",
+    title: "Matching, Pricing & Fulfillment",
+    description: "The systems powering every trip — from matching and dynamic pricing to trip fulfillment and platform reliability. Our teams build across backend, mobile, web, and machine learning.",
+    tags: ["Backend Systems", "ML", "Mobile & Web"],
+    color: "#7c6dfa",
     featured: false,
   },
   {
-    name: "Uber Park",
-    description:
-      "In-app parking reservations powered by Metropolis — seamless end-to-end journeys from your driveway to your destination without leaving the Uber app.",
-    category: "Platform",
-    featured: false,
-  },
-  {
-    name: "Uber Connect",
-    description:
-      "Same-day package and item delivery between trusted contacts, leveraging Uber's existing driver network without dedicated fleet investment.",
-    category: "Platform",
-    featured: false,
-  },
-  {
-    name: "Uber Hourly",
-    description:
-      "Book a driver by the hour for multiple stops — whether for business errands, city touring, or personal appointments — all on a single ride.",
-    category: "Core Platform",
-    featured: false,
-  },
-  {
-    name: "Web Platform",
-    description:
-      "Browser-based ride booking expanding access to riders who prefer not to use a mobile app — extending Uber's reach without requiring an install.",
-    category: "Platform",
+    label: "AI-Accelerated Development",
+    title: "Velocity at Global Scale",
+    description: "We leverage the latest advances in AI across the entire product development lifecycle — accelerating innovation, improving quality, and compressing the time from idea to global launch.",
+    tags: ["AI/ML", "Developer Velocity", "Innovation"],
+    color: "#f06bbc",
     featured: false,
   },
 ]
@@ -74,62 +59,90 @@ export default function Products() {
   const inView = useInView(ref, { once: true, margin: "-60px" })
 
   return (
-    <section id="products" ref={ref} className="py-28 md:py-40 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto">
-        <motion.p
+    <section id="products" ref={ref} className="py-28 md:py-40 px-6 md:px-12 relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-[50vw] h-[50vw] pointer-events-none opacity-[0.05]" style={{ background: "radial-gradient(circle, rgba(56,232,200,1) 0%, transparent 60%)", filter: "blur(80px)" }} />
+
+      <div className="max-w-7xl mx-auto relative">
+        <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="font-mono text-[0.6rem] text-accent tracking-[0.25em] uppercase mb-5"
+          className="flex items-center gap-3 mb-5"
         >
-          03 — Products
-        </motion.p>
+          <div className="h-px w-8 bg-gradient-to-r from-accent3 to-accent" />
+          <p className="font-mono text-[0.6rem] tracking-[0.25em]" style={{ background: "linear-gradient(90deg, #38e8c8, #7c6dfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>03 — WHAT WE BUILD</p>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.75, delay: 0.1 }}
-          className="mb-14 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-4"
+          className="mb-14 md:mb-20 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-end"
         >
-          <h2
-            className="font-display font-light text-cream max-w-lg"
-            style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
-          >
-            Launched at Uber.{" "}
-            <em className="text-muted not-italic">Used by millions.</em>
+          <h2 className="font-display font-light" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", color: "#f0eeff" }}>
+            Mobility Verticals Engineering.{" "}
+            <em className="not-italic" style={{ background: "linear-gradient(135deg, #7c6dfa, #f06bbc)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              230+ engineers. Five cities.
+            </em>
           </h2>
-          <p className="font-sans text-sm text-muted/60 max-w-xs text-right hidden md:block">
-            Nine flagship products shipped under my engineering leadership since 2018.
+          <p className="font-sans text-sm text-muted/80 leading-relaxed">
+            A global organization building and scaling Uber&apos;s mobility growth bets — from
+            core products serving hundreds of millions of trips to early-stage bets on
+            the future of how people and goods move through the world.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
-          {products.map((p, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {areas.map((area, i) => (
             <motion.div
-              key={p.name}
-              initial={{ opacity: 0, y: 16 }}
+              key={area.label}
+              initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, delay: 0.08 + i * 0.05 }}
-              className={`group p-8 cursor-default transition-colors duration-300 hover:bg-surface ${
-                p.featured ? "bg-surface" : "bg-bg"
-              }`}
+              transition={{ duration: 0.55, delay: 0.08 + i * 0.06 }}
+              className="group relative p-7 cursor-default rounded-xl border transition-all duration-500 hover:-translate-y-1"
+              style={{
+                background: area.featured ? `${area.color}08` : "var(--surface)",
+                borderColor: area.featured ? `${area.color}30` : "var(--border)",
+              }}
+              whileHover={{
+                borderColor: `${area.color}50`,
+                background: `${area.color}0c`,
+              }}
             >
+              {/* Glow on hover */}
+              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ boxShadow: `inset 0 0 30px ${area.color}10` }} />
+
               <div className="flex items-start justify-between mb-4">
-                <p className="font-mono text-[0.55rem] text-muted/50 tracking-[0.2em]">
-                  {p.category}
+                <p className="font-mono text-[0.55rem] tracking-[0.2em]" style={{ color: `${area.color}80` }}>
+                  {area.label}
                 </p>
-                {p.featured && (
-                  <span className="font-mono text-[0.5rem] text-accent tracking-[0.15em] border border-accent/30 px-2 py-0.5">
-                    FLAGSHIP
+                {area.featured && (
+                  <span className="font-mono text-[0.5rem] tracking-[0.12em] px-2 py-0.5 rounded-sm" style={{ color: area.color, border: `1px solid ${area.color}40`, background: `${area.color}10` }}>
+                    SCALED
                   </span>
                 )}
               </div>
-              <h3 className="font-display text-xl font-medium text-cream mb-3 group-hover:text-accent transition-colors duration-300">
-                {p.name}
+
+              <h3
+                className="font-display text-xl font-medium mb-3 transition-colors duration-300"
+                style={{ color: "#f0eeff" }}
+              >
+                <span className="group-hover:text-[var(--c)] transition-colors duration-300" style={{ "--c": area.color } as React.CSSProperties}>
+                  {area.title}
+                </span>
               </h3>
-              <p className="font-sans text-sm text-muted/80 leading-relaxed">
-                {p.description}
+
+              <p className="font-sans text-sm text-muted/80 leading-relaxed mb-5">
+                {area.description}
               </p>
+
+              <div className="flex flex-wrap gap-2">
+                {area.tags.map((tag) => (
+                  <span key={tag} className="font-mono text-[0.5rem] tracking-[0.1em] px-2 py-1 rounded-sm" style={{ color: `${area.color}70`, border: `1px solid ${area.color}20` }}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>
