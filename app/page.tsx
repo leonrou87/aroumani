@@ -1,5 +1,7 @@
+import Cursor from "@/components/cursor"
 import Nav from "@/components/nav"
 import Hero from "@/components/hero"
+import MarqueeBar from "@/components/marquee-bar"
 import About from "@/components/about"
 import Timeline from "@/components/timeline"
 import Products from "@/components/products"
@@ -10,9 +12,11 @@ import Footer from "@/components/footer"
 export default function Home() {
   return (
     <>
+      <Cursor />
       <Nav />
       <main>
         <Hero />
+        <MarqueeBar />
         <About />
         <Timeline />
         <Products />

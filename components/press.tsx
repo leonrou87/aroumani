@@ -6,35 +6,27 @@ import { useRef } from "react"
 const items = [
   {
     quote: "We are thrilled to offer skiers and snowboarders alike a convenient and reliable way to get to the mountain this season.",
-    attribution: "Adib Roumani, Director of Engineering, Uber",
     outlet: "Parade / Yahoo Finance",
     year: "2025",
-    context: "Uber Ski launch with Vail Resorts",
-    color: "#38e8c8",
+    context: "Uber Ski · Vail Resorts launch",
   },
   {
     quote: "Powered by Uber Reserve, we are able to unlock an incredible champagne experience exclusively in the Uber app — the first ever champagne tour bookable directly through Uber.",
-    attribution: "Adib Roumani",
     outlet: "LinkedIn",
     year: "2024",
-    context: "Uber Bubbles — Paris, France",
-    color: "#f06bbc",
+    context: "Uber Bubbles · Paris, France",
   },
   {
     quote: "Uber Reserve continues to power more and more amazing experiences around the world — from champagne tastings in France to yacht adventures in Ibiza to safari drives in Cape Town.",
-    attribution: "Adib Roumani",
     outlet: "LinkedIn",
     year: "2024",
-    context: "Uber Safari — Cape Town",
-    color: "#7c6dfa",
+    context: "Uber Safari · Cape Town",
   },
   {
     quote: "Guest Lecture: Building Products at Scale — Engineering, Product & Leadership",
-    attribution: "CS 301 Guest Lecture Series",
     outlet: "University of Toronto",
     year: "2023",
-    context: "Invited speaker, Department of Computer Science",
-    color: "#f0b429",
+    context: "CS 301 · Department of Computer Science",
   },
 ]
 
@@ -43,52 +35,58 @@ export default function Press() {
   const inView = useInView(ref, { once: true, margin: "-60px" })
 
   return (
-    <section ref={ref} className="py-28 md:py-40 px-6 md:px-12 relative overflow-hidden" style={{ background: "var(--surface)" }}>
-      <div className="absolute bottom-0 right-0 w-[40vw] h-[40vw] pointer-events-none opacity-[0.06]" style={{ background: "radial-gradient(circle, rgba(240,107,188,1) 0%, transparent 65%)", filter: "blur(60px)" }} />
-
-      <div className="max-w-7xl mx-auto relative">
+    <section ref={ref} className="py-28 md:py-40 px-6 md:px-12" style={{ background: "var(--bg2)" }}>
+      <div className="max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0, x: -20 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="flex items-center gap-3 mb-14 md:mb-20"
+          className="flex items-center gap-3 mb-16 md:mb-20"
         >
-          <div className="h-px w-8 bg-gradient-to-r from-gold to-accent2" />
-          <p className="font-mono text-[0.6rem] tracking-[0.25em]" style={{ background: "linear-gradient(90deg, #f0b429, #f06bbc)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>04 — PRESS & SPEAKING</p>
+          <div className="w-6 h-[2px]" style={{ background: "var(--accent)" }} />
+          <p className="font-mono text-[0.6rem] tracking-[0.3em] text-muted">04 — PRESS & SPEAKING</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-4">
           {items.map((item, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.65, delay: 0.1 + i * 0.1 }}
-              className="group relative p-8 md:p-10 rounded-xl border transition-all duration-500 hover:-translate-y-1"
-              style={{
-                background: `${item.color}06`,
-                borderColor: `${item.color}20`,
-              }}
-              whileHover={{ borderColor: `${item.color}45`, background: `${item.color}0e` }}
+              transition={{ duration: 0.7, delay: 0.1 + i * 0.1 }}
+              className="group relative border border-border bg-bg hover:bg-bg3 transition-all duration-400 p-8 md:p-12 overflow-hidden"
             >
-              {/* Quote mark */}
+              {/* Accent bar left */}
               <div
-                className="font-display text-6xl font-light leading-none mb-4 opacity-30"
-                style={{ color: item.color }}
-              >
-                &ldquo;
-              </div>
+                className="absolute left-0 top-0 bottom-0 w-[2px] scale-y-0 group-hover:scale-y-100 transition-transform duration-400 origin-bottom"
+                style={{ background: "var(--accent)" }}
+              />
 
-              <p className="font-display font-light italic leading-relaxed mb-5" style={{ fontSize: "clamp(1.05rem, 1.8vw, 1.25rem)", color: "#f0eeff" }}>
-                {item.quote}
-              </p>
-              <p className="font-sans text-xs text-muted/60 mb-6">{item.context}</p>
-
-              <div className="flex items-center justify-between border-t pt-4" style={{ borderColor: `${item.color}20` }}>
-                <p className="font-mono text-[0.58rem] tracking-[0.15em]" style={{ color: item.color }}>
-                  {item.outlet}
-                </p>
-                <p className="font-mono text-[0.58rem] text-muted/40 tracking-[0.15em]">{item.year}</p>
+              <div className="flex flex-col md:flex-row md:items-start justify-between gap-8">
+                <div className="flex-1">
+                  <span
+                    className="font-display font-black text-5xl leading-none"
+                    style={{ color: "rgba(255,77,0,0.15)" }}
+                  >
+                    &ldquo;
+                  </span>
+                  <p
+                    className="font-display font-semibold text-text leading-snug -mt-2 mb-4"
+                    style={{ fontSize: "clamp(1.1rem, 2vw, 1.4rem)" }}
+                  >
+                    {item.quote}
+                  </p>
+                  <p className="font-mono text-[0.58rem] text-muted/50 tracking-[0.15em]">{item.context}</p>
+                </div>
+                <div className="md:text-right md:min-w-[140px] shrink-0">
+                  <p
+                    className="font-mono text-[0.6rem] tracking-[0.18em] mb-1 transition-colors duration-300 group-hover:text-accent"
+                    style={{ color: "var(--muted)" }}
+                  >
+                    {item.outlet}
+                  </p>
+                  <p className="font-mono text-[0.58rem] text-muted/40">{item.year}</p>
+                </div>
               </div>
             </motion.div>
           ))}

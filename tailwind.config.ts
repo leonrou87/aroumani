@@ -9,29 +9,22 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        display: ["Cormorant Garamond", "serif"],
-        sans: ["DM Sans", "sans-serif"],
+        display: ["Bricolage Grotesque", "sans-serif"],
+        sans: ["Instrument Sans", "sans-serif"],
         mono: ["JetBrains Mono", "monospace"],
       },
       colors: {
-        bg: "#06060f",
-        surface: "#0d0d1f",
-        surface2: "#111128",
-        border: "#1e1e40",
-        text: "#f0eeff",
-        muted: "#7a789a",
-        accent: "#7c6dfa",
-        accent2: "#f06bbc",
-        accent3: "#38e8c8",
-        gold: "#f0b429",
-      },
-      backgroundImage: {
-        "grad-main": "linear-gradient(135deg, #7c6dfa 0%, #f06bbc 50%, #38e8c8 100%)",
-        "grad-warm": "linear-gradient(135deg, #f0b429 0%, #f06bbc 100%)",
+        bg: "#080808",
+        bg2: "#111111",
+        bg3: "#161616",
+        border: "#222222",
+        text: "#F5F0E8",
+        muted: "#999999",
+        accent: "#FF4D00",
+        gold: "#FFB800",
       },
     },
   },
   plugins: [],
 }
-
 export default config
