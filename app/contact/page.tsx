@@ -21,16 +21,29 @@ const socials = [
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" })
   const [sent, setSent] = useState(false)
+  const [error, setError] = useState(false)
+  const [sending, setSending] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const sub = encodeURIComponent(`Message from ${form.name}`)
-    const body = encodeURIComponent(
-      `${form.message}\n\n---\nFrom: ${form.name}\nReply to: ${form.email}`
-    )
-    // Replace with your actual email address
-    window.location.href = `mailto:YOUR_EMAIL_HERE?subject=${sub}&body=${body}`
-    setSent(true)
+    setSending(true)
+    setError(false)
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      })
+      if (res.ok) {
+        setSent(true)
+      } else {
+        setError(true)
+      }
+    } catch {
+      setError(true)
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -73,7 +86,7 @@ export default function ContactPage() {
                     Thank you.
                   </p>
                   <p className="font-sans text-sm text-muted leading-relaxed">
-                    Your message has been queued. I&rsquo;ll get back to you soon.
+                    Message sent. I&rsquo;ll be in touch.
                   </p>
                 </div>
               ) : (
@@ -111,12 +124,18 @@ export default function ContactPage() {
                       className="w-full bg-transparent border-b border-border focus:border-accent outline-none py-3 font-sans text-sm text-cream placeholder:text-muted/30 transition-colors duration-300 resize-none"
                     />
                   </div>
+                  {error && (
+                    <p className="font-mono text-[0.6rem] text-red-400 tracking-[0.15em]">
+                      Something went wrong — please try again.
+                    </p>
+                  )}
                   <button
                     type="submit"
-                    className="group flex items-center gap-4 font-mono text-[0.6rem] tracking-[0.25em] text-cream hover:text-accent transition-colors duration-300"
+                    disabled={sending}
+                    className="group flex items-center gap-4 font-mono text-[0.6rem] tracking-[0.25em] text-cream hover:text-accent transition-colors duration-300 disabled:opacity-40"
                   >
                     <span className="h-px w-8 bg-current group-hover:w-16 transition-all duration-300" />
-                    SEND MESSAGE
+                    {sending ? "SENDING..." : "SEND MESSAGE"}
                   </button>
                 </form>
               )}
